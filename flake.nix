@@ -1,5 +1,5 @@
 {
-  description = "Example JavaScript development environment for Zero to Nix";
+  description = "A Beginner's Introduction to Nix";
 
   # Flake inputs
   inputs = {
