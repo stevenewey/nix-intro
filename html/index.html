@@ -1,32 +1,36 @@
----
-title: A Beginner's Introduction to Nix
-theme: solarized
-revealOptions:
-    width: 1280
-    height: 720
-    transition: 'concave'
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>A Beginner's Introduction to Nix</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/solarized.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
 
 # A Beginner's Introduction to Nix
 
 #### by Stephen Newey
 
 #### 2023-08-03
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ## Nix and me
 
 Nix is a language, build system and package manager with more than 80,000 packages. Available for Linux, macOS and WSL.
 
 I'm a recovering Mac user and "DevOpsy" guy with a fondness for declarative infrastructure. I am the beginner referenced in the title.
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ## What's in it for me?
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Single use tools
 
 ```
@@ -42,9 +46,7 @@ I'm a recovering Mac user and "DevOpsy" guy with a fondness for declarative infr
                 ||----w |
                 ||     ||
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Development environments
 
 #### Off the shelf
@@ -59,18 +61,14 @@ Python 3.9.17 (main, Jun  6 2023, 09:45:13)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 #### From a template
 
 ```bash
 mkdir nix-javascript-dev && cd nix-javascript-dev
 nix flake init --template "github:DeterminateSystems/zero-to-nix#javascript-dev"
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ## Imperative
 
 <!-- .slide: data-transition="concave-in fade-out" -->
@@ -97,9 +95,7 @@ CMD [ "/slides" ]
 ```bash
 docker run --rm -p 1948:1948 -v /home/snewey/nix-intro:/slides webpronl/reveal-md
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 <!-- .slide: data-transition="fade-in concave-out" -->
 
 ## Declarative
@@ -147,9 +143,7 @@ docker run --rm -p 1948:1948 -v /home/snewey/nix-intro:/slides webpronl/reveal-m
 ```bash
 nix develop --command reveal-md slides.md
 ```
-
----
-
+</script></section><section ><section data-markdown><script type="text/template">
 ## Versioning
 
 ```json
@@ -181,9 +175,7 @@ nix develop --command reveal-md slides.md
 }
 
 ```
-
-----
-
+</script></section><section data-markdown><script type="text/template">
 ```text
 [stephen@surfnix:~/nix-intro]$ nix flake update
 warning: updating lock file '/home/stephen/nix-intro/flake.lock':
@@ -192,9 +184,7 @@ warning: updating lock file '/home/stephen/nix-intro/flake.lock':
   → 'github:NixOS/nixpkgs/d3a6adc9b6f11e260da168714ad8dcc938621610' (2023-07-30)
 
 ```
-
----
-
+</script></section></section><section  data-markdown><script type="text/template">
 ### What's actually going on here?
 
 
@@ -202,9 +192,7 @@ warning: updating lock file '/home/stephen/nix-intro/flake.lock':
 [nix-shell:~/nix-intro]$ type cowsay
 cowsay is /nix/store/zbs7jdi6xg9g4vmzj7b3x8nz2pll55vh-cowsay-3.7.0/bin/cowsay
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Nix the build system
 
 ```nix
@@ -262,15 +250,11 @@ stdenv.mkDerivation rec {
   };
 }
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ## Could you build a whole Linux distribution this way?
 
 ###### (Yes)
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ## NixOS
 
 Your entire system, defined in `/etc/nixos/configuration.nix` &dagger;
@@ -279,9 +263,7 @@ Your entire system, defined in `/etc/nixos/configuration.nix` &dagger;
 <br>
 
 &dagger; at least to start with
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### configuration.nix
 
 ```nix
@@ -416,9 +398,7 @@ Your entire system, defined in `/etc/nixos/configuration.nix` &dagger;
 
 }
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Apply it now
 
 ```bash
@@ -429,24 +409,18 @@ nixos-rebuild switch
 ```bash
 nixos-rebuild boot
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Generations
 
 ![NixOS Bootload Generations](images/nixos-grub.png)
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Get your git on
 
 ```bash
 cd ~/nix-config
 nixos-rebuild switch --flake .#surfnix
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Play hard mode
 
 NixOS can boot with only `/nix` and `/boot`
@@ -490,9 +464,7 @@ https://github.com/nix-community/impermanence
   };
 }
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Take care of your home life
 
 https://nix-community.github.io/home-manager/
@@ -501,9 +473,7 @@ https://nix-community.github.io/home-manager/
 cd nix-config
 home-manager switch --flake .#stephen@surfnix
 ```
-
----
-
+</script></section><section  data-markdown><script type="text/template">
 ### Thank you
 
 This meeting could have been a Git repo
@@ -517,3 +487,56 @@ Documentation: [Zero to Nix](https://zero-to-nix.com/)
 Code: [nix-start-configs](https://github.com/Misterio77/nix-starter-configs)
 
 Videos: [vimjoyer on YouTube](https://www.youtube.com/watch?v=bjTxiFLSNFA) | [Will T on YouTube](https://www.youtube.com/watch?v=QKoQ1gKJY5A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&pp=iAQB)
+</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":1280,"height":720,"transition":"concave"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
